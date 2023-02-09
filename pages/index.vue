@@ -112,6 +112,15 @@ export default {
 
             recognition.start()
         },
+        textToSpeech() {
+            const utterThis = new SpeechSynthesisUtterance()
+            const synth = window.speechSynthesis
+
+            utterThis.text = this.translated
+            utterThis.lang = this.to
+
+            synth.speak(utterThis)
+        },
         changeCurrentLanguage(val) {
             this.current = val
         }
@@ -136,6 +145,8 @@ export default {
                         <option v-for="item in languages" :key="item.code" :value="item.code"> {{ item.name }} </option>
                     </c-select>
                 </c-box>
+                <div @click="textToSpeech()">speak</div>
+
             </c-flex>
         </div>
     </div>
